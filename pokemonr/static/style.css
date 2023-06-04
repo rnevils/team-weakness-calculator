@@ -1,0 +1,40 @@
+html {
+  font-family: sans-serif;
+}
+
+form {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 2px solid rgb(200, 200, 200);
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td,
+th {
+  border: 1px solid rgb(190, 190, 190);
+  padding: 10px 20px;
+}
+
+th {
+  background-color: rgb(235, 235, 235);
+}
+
+td {
+  text-align: center;
+}
+
+.total-weak {
+  background: rgba(225, 7, 7, 0.2);
+}
+
+caption {
+  padding: 10px;
+}

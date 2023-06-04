@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Team Weakness results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <table>
+        <tr>
+            <td>&nbsp;</td>
+            {% for pokemon in pokemons %}
+            <th>{{pokemon}}</th>
+            {% endfor %}
+            <th>Total weak</th>
+            <th>Total resist</th>
+        </tr>
+
+        {% for type in weaknesses%}
+        <tr>
+            <th>{{type}}</th>
+            {% for matchup in weaknesses[type] %}
+                {% if matchup == 2 %}
+                    <td class="total-weak">{{matchup}}</td>
+                {% else %}
+                    <td>{{matchup}}</td>
+                {% endif %}
+            {% endfor %}
+
+        {% endfor %}
+        </tr>
+        
+    </table>
+
+</body>
+
+</html>
