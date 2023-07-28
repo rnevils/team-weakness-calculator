@@ -24,21 +24,18 @@ def create():
 
 
 def get_class(matchup):
-    match matchup:
-        case 0:
-            return "no-effect"
-        case 0.5:
-            return "not-very-effective"
-        case 0.25:
-            return "very-not-very-effective"
-        case 2:
-            return "super-effective"
-        case 4:
-            return "very-super-effective"
-        case _:
-            return "normal-effective"
-
-    return "matchup-20"
+    if matchup == 0:
+        return "no-effect"
+    elif matchup == 0.5:
+        return "not-very-effective"
+    elif matchup == 0.25:
+        return "very-not-very-effective"
+    elif matchup == 2:
+        return "super-effective"
+    elif matchup == 4:
+        return "very-super-effective"
+    else:
+        return "normal-effective"
 
 
 def create_data(body):
