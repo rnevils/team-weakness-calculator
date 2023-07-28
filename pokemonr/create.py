@@ -110,6 +110,4 @@ def create_data(body):
         else:
             final_data[type]["Total_Resist"] = num_resist
 
-    print(final_data)
-
     return names, final_data
