@@ -1,20 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokemon Team Weakness Calculator</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <script
+      src="{{ url_for('static', filename='js/toggle.js') }}"
+      defer
+    ></script>
+  </head>
 
-<body>
-    <form action="/create" method="post">
-        <textarea name="body" placeholder="Paste team here"></textarea>
-        <input type="submit" value="Submitmehere">
-    </form>
+  <body class="dark">
+    <div id="preferences">
+      <input id="darkmode" type="checkbox" />
+      <label for="darkmode" id="darkmodelabel">Dark Mode</label>
+    </div>
+    <h1>Pokemon Team Coverage Chart</h1>
+    <div class="submitbox">
+      <form action="/results" method="post">
+        <div class="header-container">
+          <p>
+            Paste in any team in
+            <a
+              href="https://github.com/smogon/pokemon-showdown/blob/master/sim/TEAMS.md"
+              target="_blank"
+              >Showdown "export format"</a
+            >
+          </p>
+        </div>
 
-
-</body>
-
+        <textarea
+          name="body"
+          rows="30"
+          placeholder="Paste team here"
+        ></textarea>
+        <input class="pasteButton" type="submit" value="Submit" />
+      </form>
+    </div>
+  </body>
 </html>

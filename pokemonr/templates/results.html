@@ -1,41 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pokemon Team Weakness results</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
 
-<body>
-
+  <body class="dark">
     <table>
+      <thead>
         <tr>
-            <td>&nbsp;</td>
-            {% for pokemon in pokemons %}
-            <th>{{pokemon}}</th>
-            {% endfor %}
-            <th>Total weak</th>
-            <th>Total resist</th>
+          <td>&nbsp;</td>
+          {% for pokemon in pokemons %}
+          <th>{{pokemon}}</th>
+          {% endfor %}
+          <th>Total weak</th>
+          <th>Total resist</th>
         </tr>
+      </thead>
 
-        {% for type in weaknesses%}
+      <tbody>
+        {% for type,data in weaknesses.items()%}
         <tr>
-            <th>{{type}}</th>
-            {% for matchup in weaknesses[type] %}
-                {% if matchup == 2 %}
-                    <td class="total-weak">{{matchup}}</td>
-                {% else %}
-                    <td>{{matchup}}</td>
-                {% endif %}
-            {% endfor %}
-
-        {% endfor %}
+          <td class="type-{{type}}">{{type.upper()}}</td>
+          {% for matchup in data["matchups"] %}
+          <td>
+            <span class="{{get_class(matchup)}}">
+              {{ "\u00BD" if matchup == 0.5 else "\u00BC" if matchup == 0.25
+              else matchup}}
+            </span>
+          </td>
+          {% endfor %}
+          <td class="total-weak-{{data.Total_Weak}}">{{data["Total_Weak"]}}</td>
+          <td class="resist-{{data.Total_Resist}}">{{data["Total_Resist"]}}</td>
+          {% endfor %}
         </tr>
-        
+      </tbody>
     </table>
-
-</body>
-
+  </body>
 </html>

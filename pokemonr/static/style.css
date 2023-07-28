@@ -1,40 +1,289 @@
+.type-Bug {
+  background-color: #a6b91a;
+  color: white;
+}
+
+.type-Dark {
+  background-color: #705746;
+  color: white;
+}
+
+.type-Dragon {
+  background-color: #6f35fc;
+  color: white;
+}
+
+.type-Electric {
+  background-color: #f7d02c;
+  color: white;
+}
+
+.type-Fighting {
+  background-color: #c22e28;
+  color: white;
+}
+
+.type-Fire {
+  background-color: #ee8130;
+  color: white;
+}
+
+.type-Flying {
+  background-color: #a98ff3;
+  color: white;
+}
+
+.type-Ghost {
+  background-color: #735797;
+  color: white;
+}
+
+.type-Grass {
+  background-color: #7ac74c;
+  color: white;
+}
+
+.type-Ground {
+  background-color: #e2bf65;
+  color: white;
+}
+
+.type-Ice {
+  background-color: #96d9d6;
+  color: white;
+}
+
+.type-Normal {
+  background-color: #a8a77a;
+  color: white;
+}
+
+.type-Poison {
+  background-color: #a33ea1;
+  color: white;
+}
+
+.type-Psychic {
+  background-color: #f95587;
+  color: white;
+}
+
+.type-Rock {
+  background-color: #b6a136;
+  color: white;
+}
+
+.type-Steel {
+  background-color: #b7b7ce;
+  color: white;
+}
+
+.type-Water {
+  background-color: #6390f0;
+  color: white;
+}
+
 html {
-  font-family: sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: rgb(250, 250, 250);
+}
+
+body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  font-size: 13px;
+  margin: 0%;
+  height: 100vh;
+  --textarea-background: white;
+  --textarea-border-color: #ddd;
+  --link-color: rgb(38, 56, 236);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-top: 0;
+}
+
+.dark {
+  color: rgb(250, 250, 250);
+  background-color: rgb(23, 23, 23);
+  --textarea-background: #2b2b2b;
+  --textarea-border-color: #333333;
+  --textarea-color: #ddd;
+  --link-color: #81b6de;
+}
+
+.pasteButton {
+  background-color: rgb(41, 133, 58);
+  color: white;
+  border-radius: 2px;
+  padding: 5px 10px 5px 10px;
+  border: 0;
+  width: 15%;
+  margin-top: 13px;
+  cursor: pointer;
+}
+
+.pasteButton:hover {
+  background-color: rgb(52, 159, 72);
+}
+
+#preferences {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  width: 80%;
+}
+
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.submitbox {
+  width: 600px;
+}
+
+#darkmode {
+  display: none;
+}
+
+#darkmodelabel {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 form {
-	display: flex;
-	flex-flow: row wrap;
+  display: flex;
+  flex-direction: column;
+}
+form textarea {
+  background-color: var(--textarea-background);
+  border-radius: 3px;
+  outline: none;
+  padding: 8px 12px;
+  border: 1px solid var(--textarea-border-color);
+  color: var(--textarea-color);
+  box-sizing: border-box;
+  resize: none;
 }
 
 table {
   margin-top: 20px;
   border-collapse: collapse;
-  border: 2px solid rgb(200, 200, 200);
   letter-spacing: 1px;
   font-size: 0.8rem;
   margin-left: auto;
   margin-right: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: whitesmoke;
+  background-color: #0a0a0a;
+}
+
+a {
+  color: var(--link-color);
 }
 
 td,
 th {
   border: 1px solid rgb(190, 190, 190);
   padding: 10px 20px;
-}
-
-th {
-  background-color: rgb(235, 235, 235);
+  border: 1px solid #363636;
+  border-width: 1px;
+  padding: 0.5em;
+  padding-top: 0.7em;
+  font-size: smaller;
 }
 
 td {
   text-align: center;
+  font-size: 0.8rem;
 }
 
-.total-weak {
-  background: rgba(225, 7, 7, 0.2);
+th {
+  min-width: 65px;
+}
+
+.total-weak- {
+  background: rgba(225, 7, 7, 0.01);
+}
+
+.total-weak-1 {
+  background-color: #6c5656;
+}
+
+.total-weak-2 {
+  background-color: #6c4141;
+}
+
+.total-weak-3 {
+  background-color: #6c2b2b;
+}
+
+.resist- {
+  background: rgba(42, 255, 18, 0.01);
+}
+
+.resist-1 {
+  background-color: #566c5a;
+}
+
+.resist-2 {
+  background-color: #416c48;
+}
+
+.resist-3 {
+  background-color: #2b6c36;
 }
 
 caption {
   padding: 10px;
+}
+
+.matchup-20 {
+  color: #ff0000;
+}
+
+.matchup-5 {
+  color: #ff0000;
+}
+
+.not-very-effective {
+  color: #27ca27;
+  font-weight: 1000;
+}
+
+.very-not-very-effective {
+  color: #fff;
+  background-color: green;
+  padding: 0.1em;
+  border-radius: 2px;
+  font-weight: 1000;
+}
+
+.super-effective {
+  color: red;
+  font-weight: 900;
+}
+
+.very-super-effective {
+  color: #fff;
+  background-color: red;
+  padding: 0.1em;
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+  border-radius: 2px;
+  font-weight: 1000;
+}
+
+.no-effect {
+  background-color: #787878;
+  border-radius: 2px;
+  padding: 0.1em;
 }
