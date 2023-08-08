@@ -12,17 +12,9 @@
       rel="shortcut icon"
       href="{{ url_for('static', filename='favicon.ico') }}"
     />
-    <script
-      src="{{ url_for('static', filename='js/toggle.js') }}"
-      defer
-    ></script>
   </head>
 
-  <body class="dark">
-    <div id="preferences">
-      <input id="darkmode" type="checkbox" />
-      <label for="darkmode" id="darkmodelabel">Dark Mode</label>
-    </div>
+  <body>
     <h1>Pokemon Team Coverage Chart</h1>
     <div class="submitbox">
       <form action="/results" method="post">
