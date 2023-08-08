@@ -8,8 +8,11 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='style.css') }}"
     />
+    <link
+      rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}"
+    />
   </head>
-
   <body class="dark">
     <table>
       <thead>
@@ -22,24 +25,30 @@
           <th>Total resist</th>
         </tr>
       </thead>
-
       <tbody>
         {% for type,data in weaknesses.items()%}
         <tr>
           <td class="type-{{type}}">{{type.upper()}}</td>
           {% for matchup in data["matchups"] %}
           <td>
-            <span class="{{get_class(matchup)}}">
+            <span class="{{get_class_matchup(matchup)}}">
               {{ "\u00BD" if matchup == 0.5 else "\u00BC" if matchup == 0.25
-              else matchup}}
+              else "" if matchup == 1 else matchup}}
             </span>
           </td>
           {% endfor %}
-          <td class="total-weak-{{data.Total_Weak}}">{{data["Total_Weak"]}}</td>
-          <td class="resist-{{data.Total_Resist}}">{{data["Total_Resist"]}}</td>
+          <td class="{{get_class_weak_total(data.Total_Weak)}}">
+            {{"" if data["Total_Weak"] == 0 else data["Total_Weak"]}}
+          </td>
+          <td class="{{get_class_resist_total(data.Total_Resist)}}">
+            {{"" if data["Total_Resist"] == 0 else data["Total_Resist"]}}
+          </td>
           {% endfor %}
         </tr>
       </tbody>
     </table>
+    <p>
+      <a href="./">homepage</a>
+    </p>
   </body>
 </html>

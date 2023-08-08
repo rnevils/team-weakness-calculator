@@ -210,7 +210,7 @@ th {
   min-width: 65px;
 }
 
-.total-weak- {
+.total-weak-0 {
   background: rgba(225, 7, 7, 0.01);
 }
 
@@ -226,20 +226,30 @@ th {
   background-color: #6c2b2b;
 }
 
-.resist- {
+.total-weak-verybad {
+  background-color: #6c2b2b;
+  color: yellow;
+}
+
+.total-resist-0 {
   background: rgba(42, 255, 18, 0.01);
 }
 
-.resist-1 {
+.total-resist-1 {
   background-color: #566c5a;
 }
 
-.resist-2 {
+.total-resist-2 {
   background-color: #416c48;
 }
 
-.resist-3 {
+.total-resist-3 {
   background-color: #2b6c36;
+}
+
+.total-resist-verygood {
+  background-color: #2b6c36;
+  color: yellow;
 }
 
 caption {
@@ -247,10 +257,14 @@ caption {
 }
 
 .matchup-20 {
+  /* border-color: #A8A77A;
+    background: #A8A77A; */
   color: #ff0000;
 }
 
 .matchup-5 {
+  /* border-color: #A8A77A;
+    background: #A8A77A; */
   color: #ff0000;
 }
 
