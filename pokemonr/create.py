@@ -129,14 +129,11 @@ def create_devensive_coverage_data(names):
 def get_pokemon_no_weakness(all_moves):
     # unpack list of lists, and create set of moves
     moves = {move for moves in all_moves for move in moves}
-    print(moves)
 
     # have to deal with hidden powers
     hidden_powers = {
         s[s.find("[") + 1 : s.find("]")].lower() for s in moves if "[" in s and "]" in s
     }
-
-    print(f"hidden powers found: {hidden_powers}")
 
     # Remove the Hidden Power entries from the set
     moves = {
@@ -146,7 +143,6 @@ def get_pokemon_no_weakness(all_moves):
     # reach into database of moves and get info on the ones we have
     # have to
     moves_info = [MOVES_DATA[move.lower().replace(" ", "-")] for move in moves]
-    print(moves_info)
 
     # get which ones actually do damage (and not fixed damage)
     offensive_types = {move["type"] for move in moves_info if move["power"]}
@@ -160,7 +156,6 @@ def get_pokemon_no_weakness(all_moves):
         for pokemon, weak_types in WEAKNESS_TYPES.items()
         if not offensive_types.intersection(weak_types)
     }
-    print(result)
 
     # filter that to relevant results... top 100 from gen 3 out smogon stats
     with open("top_100.txt") as file:
