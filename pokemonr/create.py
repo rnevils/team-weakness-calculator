@@ -1,10 +1,19 @@
 import json
 from flask import Blueprint, flash, g, render_template, request, session
 
+from pokemonr.parse import parse_input
+
 bp = Blueprint("create", __name__)
 
 with open("data.json", encoding="utf-8") as f:
     WEAKNESS_DATA = json.load(f)
+
+with open("moves.json", encoding="utf-8") as f:
+    MOVES_DATA = json.load(f)
+
+with open("weakness_types.json", encoding="utf-8") as f:
+    WEAKNESS_TYPES = json.load(f)
+
 
 POKEMON_TYPES = [
     "Normal",
@@ -37,13 +46,23 @@ def create():
     body = request.form["body"]
 
     try:
-        names = parse_input(body)
-        data = create_data(names)
+        pokemon_team_parsed = parse_input(body)
+
+        # your team
+        names = [pokemon.name for pokemon in pokemon_team_parsed]
+
+        # defensive coverage stats
+        devensive_coverage_data = create_devensive_coverage_data(names)
+
+        # pokemon you have no supereffective moves against
+        all_moves = [pokemon.moves for pokemon in pokemon_team_parsed]
+        pokemon_no_supereffective_against = get_pokemon_no_weakness(all_moves)
 
         return render_template(
             "results.html",
-            pokemons=names,
-            weaknesses=data,
+            names=names,
+            weaknesses=devensive_coverage_data,
+            pokemon_no_supereffective_against=pokemon_no_supereffective_against,
             get_class_matchup=get_class_matchup,
             get_class_resist_total=get_class_resist_total,
             get_class_weak_total=get_class_weak_total,
@@ -82,22 +101,7 @@ def get_class_resist_total(total_resist):
         return "total-resist-verygood"
 
 
-def parse_input(body):
-    mons = body.split("\r\n\r\n")  # TODO is this gonna work on all platforms
-
-    # extract names
-    names = []
-    for mon in mons:
-        mon_no_item_split = mon.split("\r\n")[0].split("@")[0].split(" ")
-        for chunk in reversed(mon_no_item_split):
-            if chunk not in ["(F)", "", "(M)"]:
-                names.append(chunk.strip("()"))
-                break
-
-    return names
-
-
-def create_data(names):
+def create_devensive_coverage_data(names):
     weaknesses_by_pokemon = [WEAKNESS_DATA[name] for name in names]
     final_data = {}
 
@@ -120,3 +124,46 @@ def create_data(names):
         final_data[type]["Total_Resist"] = num_resist
 
     return final_data
+
+
+def get_pokemon_no_weakness(all_moves):
+    # unpack list of lists, and create set of moves
+    moves = {move for moves in all_moves for move in moves}
+    print(moves)
+
+    # have to deal with hidden powers
+    hidden_powers = {
+        s[s.find("[") + 1 : s.find("]")].lower() for s in moves if "[" in s and "]" in s
+    }
+
+    print(f"hidden powers found: {hidden_powers}")
+
+    # Remove the Hidden Power entries from the set
+    moves = {
+        s for s in moves if not (s.startswith("Hidden Power [") and s.endswith("]"))
+    }
+
+    # reach into database of moves and get info on the ones we have
+    # have to
+    moves_info = [MOVES_DATA[move.lower().replace(" ", "-")] for move in moves]
+    print(moves_info)
+
+    # get which ones actually do damage (and not fixed damage)
+    offensive_types = {move["type"] for move in moves_info if move["power"]}
+
+    # add in the hidden power types
+    offensive_types = offensive_types | hidden_powers
+
+    # from those types, check entire pokedex to make sure which combos the set doesn't have anything supereffective against.
+    result = {
+        pokemon
+        for pokemon, weak_types in WEAKNESS_TYPES.items()
+        if not offensive_types.intersection(weak_types)
+    }
+    print(result)
+
+    # filter that to relevant results... top 100 from gen 3 out smogon stats
+    with open("top_100.txt") as file:
+        top_100_mons = {line.rstrip() for line in file}
+
+    return result.intersection(top_100_mons)

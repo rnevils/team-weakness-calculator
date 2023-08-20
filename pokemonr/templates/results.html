@@ -14,12 +14,13 @@
     />
   </head>
   <body class="dark">
+    <h1>Defensive Coverage</h1>
     <table>
       <thead>
         <tr>
           <td>&nbsp;</td>
-          {% for pokemon in pokemons %}
-          <th>{{pokemon}}</th>
+          {% for name in names %}
+          <th>{{name}}</th>
           {% endfor %}
           <th>Total weak</th>
           <th>Total resist</th>
@@ -47,6 +48,14 @@
         </tr>
       </tbody>
     </table>
+
+    <h1>Offense</h1>
+    <h3>
+      Commonly used pokemon you don't have a super effective move against:
+    </h3>
+    {% for pokemon in pokemon_no_supereffective_against %}
+    <div>{{pokemon}}</div>
+    {% endfor %}
     <p>
       <a href="./">homepage</a>
     </p>
